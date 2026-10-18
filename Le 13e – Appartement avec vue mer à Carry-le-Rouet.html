@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Le 13e – Appartement avec vue mer à Carry-le-Rouet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F6F0E4; --surface:#EEE6D5; --line:#E1D6C0; --ink:#332E27; --muted:#6F6657; --accent:#587480; --accent-ink:#FBF8F1; --err:#9A3412;
+  color-scheme:light;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Jost","Helvetica Neue",Arial,sans-serif;font-weight:300;font-size:18px;line-height:1.65}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+header.nav{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
+.logo{font-weight:500;letter-spacing:.02em;text-decoration:none}
+.nav a.l{margin-left:24px;text-decoration:none;color:var(--muted);font-size:16px}
+.nav a.l:hover{color:var(--ink)}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:end;padding:40px 0 72px}
+.hero h1{font-weight:300;font-size:clamp(44px,7vw,92px);line-height:1;letter-spacing:-.03em;margin:0 0 24px}
+.hero p{max-width:440px;color:var(--muted);margin:0 0 32px}
+.btn{display:inline-block;background:var(--accent);color:var(--accent-ink);padding:14px 30px;border-radius:999px;text-decoration:none;font-weight:400;border:0;font:inherit;font-weight:400;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);margin-left:10px}
+.tower{background:var(--surface);border-radius:200px 200px 12px 12px;aspect-ratio:3/4;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
+.tower .num{position:absolute;top:12%;left:0;right:0;text-align:center;font-size:clamp(120px,20vw,230px);font-weight:300;line-height:1;letter-spacing:-.05em;color:var(--ink)}
+.tower .cap{position:absolute;top:calc(12% + clamp(130px,22vw,250px));left:0;right:0;text-align:center;color:var(--muted);font-size:16px}
+.sea{height:34%;display:flex;flex-direction:column}
+.sea i{flex:1;display:block}
+.sea i:nth-child(1){background:color-mix(in srgb,var(--accent) 35%,var(--surface))}
+.sea i:nth-child(2){background:color-mix(in srgb,var(--accent) 55%,var(--surface))}
+.sea i:nth-child(3){background:color-mix(in srgb,var(--accent) 75%,var(--surface))}
+.sea i:nth-child(4){background:var(--accent)}
+.photo{margin:0}
+[hidden]{display:none!important}
+.chk{display:flex;gap:10px;align-items:flex-start;color:var(--ink);font-size:16px;margin:0 0 14px}
+.chk input{width:auto;margin:5px 0 0;flex:none}
+.err{color:var(--err);font-size:15px;margin:0 0 12px}
+.cg h3{font-weight:400;font-size:20px;margin:30px 0 6px}
+.cg p{color:var(--muted);max-width:640px;margin:0}
+.calbox{background:var(--surface);border-radius:12px;padding:20px;max-width:360px;margin-top:20px}
+.calhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;text-transform:capitalize}
+.calhead button{background:transparent;border:1px solid var(--line);color:var(--ink);border-radius:50%;width:34px;height:34px;font-size:18px;cursor:pointer}
+.calgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
+.dw{font-size:13px;color:var(--muted)}
+.day{font:inherit;font-size:15px;color:var(--ink);background:var(--bg);border:1px solid transparent;border-radius:8px;aspect-ratio:1;padding:0;cursor:pointer}
+.day.past{color:var(--line);background:transparent;cursor:default}
+.day.busy{color:var(--muted);background:repeating-linear-gradient(135deg,transparent 0 4px,var(--line) 4px 5px);text-decoration:line-through;cursor:not-allowed}
+.day.in{background:color-mix(in srgb,var(--accent) 25%,var(--bg))}
+.day.sel{background:var(--accent);color:var(--accent-ink)}
+.legend{font-size:14px;color:var(--muted);margin:14px 0 0}
+.k{display:inline-block;width:12px;height:12px;border-radius:3px;margin:0 6px 0 0;vertical-align:-1px;background:var(--bg);border:1px solid var(--line)}
+.k.busy{margin-left:14px;background:repeating-linear-gradient(135deg,transparent 0 3px,var(--line) 3px 4px)}
+.faq details{border-bottom:1px solid var(--line);padding:16px 0;max-width:760px}
+.faq summary{cursor:pointer;font-size:19px;font-weight:400;list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--accent);font-size:24px;line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq details p{margin:10px 0 0;color:var(--muted);max-width:640px}
+.faq h3{font-weight:300;font-size:26px;margin:44px 0 6px}
+.foot a{margin-left:16px}
+.photo svg{display:block;width:100%;aspect-ratio:3/4;border-radius:200px 200px 12px 12px}
+.photo figcaption{color:var(--muted);font-size:15px;margin-top:10px}
+section{padding:72px 0;border-top:1px solid var(--line)}
+h2{font-weight:300;font-size:clamp(30px,4vw,46px);letter-spacing:-.02em;line-height:1.1;margin:0 0 28px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.two p{margin:0 0 16px;max-width:520px}
+.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.facts div{background:var(--bg);padding:22px}
+.facts b{display:block;font-weight:400;font-size:22px}
+.facts span{color:var(--muted);font-size:15px}
+ul.eq{list-style:none;margin:0;padding:0;columns:3;column-gap:40px}
+ul.eq li{padding:12px 0;border-bottom:1px solid var(--line);break-inside:avoid}
+.rates{background:var(--surface);border-radius:12px;padding:32px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.rates h3{margin:0 0 6px;font-weight:400;font-size:19px}
+.rates p{margin:0;color:var(--muted);font-size:16px}
+.rates strong{display:block;font-size:28px;font-weight:300;color:var(--ink);margin-top:8px}
+label{display:block;font-size:15px;color:var(--muted);margin:0 0 6px}
+input,textarea{width:100%;font:inherit;font-size:17px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:18px}
+.dates{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+footer{padding:40px 0;border-top:1px solid var(--line);color:var(--muted);font-size:15px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.tabs button{font:inherit;font-size:16px;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:999px;padding:8px 20px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.ph{background:var(--surface);border:1px dashed var(--line);border-radius:12px;aspect-ratio:4/3;display:grid;place-items:center;text-align:center;color:var(--muted);font-size:15px;padding:12px}
+.ph:first-child{grid-column:span 2;grid-row:span 2;aspect-ratio:auto;min-height:260px}
+.grid img{width:100%;height:100%;object-fit:cover;border-radius:12px;display:block}
+.steps{list-style:none;margin:0;padding:0;counter-reset:s;max-width:640px}
+.steps li{counter-increment:s;position:relative;padding:0 0 26px 60px}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:38px;height:38px;border-radius:50%;background:var(--surface);border:1px solid var(--line);display:grid;place-items:center;font-weight:400}
+.steps li::after{content:"";position:absolute;left:19px;top:44px;bottom:6px;width:1px;background:var(--line)}
+.steps li:last-child::after{display:none}
+.steps b{display:block;font-weight:400;font-size:20px}
+.steps span{color:var(--muted)}
+.note{background:var(--surface);border-radius:12px;padding:20px 24px;margin-top:8px;max-width:640px}
+.back{display:inline-block;margin:8px 0 24px;color:var(--muted);text-decoration:none;font-size:16px}
+@media(max-width:800px){
+  .grid{grid-template-columns:1fr 1fr}
+  .hero,.two{grid-template-columns:1fr}
+  .tower,.photo{max-width:360px}
+  ul.eq{columns:2}
+  .rates{grid-template-columns:1fr}
+  .nav a.l.h{display:none}
+}
+@media(max-width:480px){ul.eq{columns:1}.btn.ghost{margin:12px 0 0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="nav">
+    <a class="logo" href="#">Le 13e · Carry-le-Rouet</a>
+    <nav><a class="l h" href="#appartement">L’appartement</a><a class="l h" href="#photos">Photos</a><a class="l h" href="#equipements">Équipements</a><a class="l h" href="#tarifs">Tarifs</a><a class="l h" href="#arrivee">Arrivée &amp; départ</a><a class="l" href="#contact">Réserver</a></nav>
+  </header>
+
+  <main id="home">
+  <div class="hero">
+    <div>
+      <h1>Face à la Méditerranée, à Carry-le-Rouet.</h1>
+      <p>Un appartement lumineux au 13<sup>e</sup> étage de la tour de Carry-le-Rouet, pour des vacances au calme, face à la mer.</p>
+      <a class="btn" href="#contact">Demander les disponibilités</a><a class="btn ghost" href="#appartement">Découvrir</a>
+    </div>
+    <figure class="photo">
+      <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustration de la côte de Carry-le-Rouet">
+        <rect width="300" height="400" style="fill:var(--surface)"/>
+        <circle cx="210" cy="130" r="36" fill="#E7C9A2" opacity=".85"/>
+        <path d="M0 270 Q70 215 140 250 T300 232 V310 H0Z" style="fill:color-mix(in srgb,var(--accent) 28%,var(--surface))"/>
+        <rect y="272" width="300" height="128" style="fill:color-mix(in srgb,var(--accent) 45%,var(--surface))"/>
+        <rect y="316" width="300" height="84" style="fill:color-mix(in srgb,var(--accent) 70%,var(--surface))"/>
+        <rect y="362" width="300" height="38" style="fill:var(--accent)"/>
+      </svg>
+      <figcaption>Carry-le-Rouet, sur la Côte Bleue</figcaption>
+    </figure>
+  </div>
+
+  <section id="appartement">
+    <h2>L’appartement</h2>
+    <div class="two">
+      <div>
+        <p>Au 13<sup>e</sup> étage, la vue s’ouvre largement sur la côte bleue. Les matières sont naturelles, les tons sable et lin, et l’ensemble reste simple et reposant.</p>
+        <p>Carry-le-Rouet, village de la Côte Bleue, offre ses criques, son port et ses sentiers du bord de mer à quelques minutes.</p>
+        <p>L’appartement est non-fumeur et n’accepte pas les animaux.</p>
+      </div>
+      <div class="facts">
+        <div><b>2 voyageurs</b><span>maximum</span></div>
+        <div><b>1 chambre</b><span>T2 refait à neuf</span></div>
+        <div><b>46 m²</b><span>surface habitable</span></div>
+        <div><b>13<sup>e</sup> étage</b><span>vue dégagée</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="photos">
+    <h2>Les pièces en photos</h2>
+    <div class="tabs" id="tabs" role="tablist"></div>
+    <div class="grid" id="grid" role="tabpanel"></div>
+  </section>
+
+  <section id="equipements">
+    <h2>Équipements</h2>
+    <ul class="eq">
+      <li>Wi-Fi</li><li>Cuisine équipée</li><li>Climatisation</li><li>Linge de lit fourni</li>
+      <li>Serviettes de toilette</li><li>Télévision</li><li>Balcon ou terrasse</li><li>Ascenseur</li>
+      <li>Lave-linge</li><li>Parking</li><li>Arrivée autonome</li><li>Animaux non acceptés</li>
+    </ul>
+    <p style="color:var(--muted);font-size:15px;margin-top:16px">Liste à ajuster selon votre appartement.</p>
+  </section>
+
+  <section id="tarifs">
+    <h2>Tarif en direct</h2>
+    <div class="rates">
+      <div><h3>Basse saison</h3><p>Novembre à janvier et mars · par nuit</p><strong>95 €</strong></div>
+      <div><h3>Moyenne saison</h3><p>Avril à juin, septembre, octobre · par nuit</p><strong>125 €</strong></div>
+      <div><h3>Haute saison</h3><p>Février, juillet et août · par nuit</p><strong>180 €</strong></div>
+    </div>
+    <p style="color:var(--muted);font-size:15px;margin-top:16px">Prix pour 2 voyageurs, draps, serviettes et ménage de fin de séjour inclus. Merci de laisser l’appartement propre. La taxe de séjour est incluse dans le prix. Pour 2 adultes, elle représente environ 3,40 € à 6,50 € par personne et par nuit selon la saison (gratuite pour les mineurs). Séjour minimum : 2 nuits. Caution : 30 % de la valeur du séjour.</p>
+  </section>
+
+  <section id="horaires">
+    <h2>Horaires et conditions</h2>
+    <div class="rates">
+      <div><h3>Arrivée</h3><p>De</p><strong>16 h à 21 h</strong></div>
+      <div><h3>Départ</h3><p>Avant</p><strong>11 h</strong></div>
+      <div><h3>Arrivée après 21 h</h3><p style="margin-top:8px"><b style="font-weight:500;color:var(--ink);font-size:19px">Un accord est nécessaire</b></p></div>
+    </div>
+    <div class="note" style="max-width:none">
+      <b style="font-weight:400">En cas de non-respect des horaires</b>
+      <ul style="margin:10px 0 0;padding-left:20px">
+        <li>Départ après 11 h : 25 € par heure commencée, car le ménage doit être fait avant l’arrivée suivante.</li>
+        <li>Départ plus de 2 h après l’heure prévue : une nuit supplémentaire est facturée au tarif en vigueur.</li>
+        <li>Arrivée après 21 h sans accord préalable : 30 € de frais d’accueil tardif.</li>
+      </ul>
+      <p style="margin:12px 0 0;color:var(--muted);font-size:15px">Une arrivée plus tôt ou un départ plus tard sont possibles sur demande, selon les disponibilités.</p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Réserver votre séjour</h2>
+    <div class="tabs" id="mode">
+      <button type="button" data-m="direct" aria-selected="true">En direct</button>
+      <button type="button" data-m="bnb" aria-selected="false">Sur Airbnb</button>
+    </div>
+    <div id="m-direct">
+      <h3 style="font-weight:300;font-size:26px;margin:0 0 24px">Comment réserver en direct</h3>
+      <ol class="steps">
+        <li><b>Envoyez votre demande</b><span>Indiquez vos dates et le nombre de voyageurs dans le formulaire ci-dessous.</span></li>
+        <li><b>Recevez votre devis</b><span>Nous vérifions les disponibilités et répondons sous [24 h] avec le prix du séjour, le ménage et la taxe de séjour.</span></li>
+        <li><b>Versez l’acompte</b><span>Un acompte de [30 %] par virement bloque vos dates. Le contrat de location vous est envoyé en même temps.</span></li>
+        <li><b>Réglez le solde et la caution</b><span>Le solde est à payer [X jours] avant l’arrivée. La caution, égale à 30 % de la valeur du séjour, est demandée [à l’arrivée / par empreinte bancaire].</span></li>
+        <li><b>Recevez les infos d’arrivée</b><span>Codes d’accès, parking et mode d’emploi vous sont envoyés [2 jours] avant votre séjour.</span></li>
+      </ol>
+      <div class="two" style="margin-top:36px">
+      <div>
+        <p>En direct, vous profitez du tarif en direct, sans frais de service. Votre messagerie s’ouvrira avec le message prêt à envoyer.</p>
+        <div class="calbox">
+          <div class="calhead"><button type="button" id="calPrev" aria-label="Mois précédent">‹</button><b id="calTitle" style="font-weight:400"></b><button type="button" id="calNext" aria-label="Mois suivant">›</button></div>
+          <div class="calgrid" id="cal"></div>
+          <p class="legend"><i class="k"></i>Disponible<i class="k busy"></i>Occupé</p>
+          <p class="legend" style="margin-top:6px">Cliquez sur votre arrivée puis votre départ : les dates se remplissent dans le formulaire.</p>
+        </div>
+      </div>
+      <div>
+        <div class="dates">
+          <div><label for="d1">Arrivée</label><input id="d1" type="date"></div>
+          <div><label for="d2">Départ</label><input id="d2" type="date"></div>
+        </div>
+        <label for="nom">Votre nom</label><input id="nom" type="text" autocomplete="name">
+        <label for="nb">Voyageurs</label><input id="nb" type="number" min="1" max="2" value="2">
+        <label for="msg">Message</label><textarea id="msg" rows="3"></textarea>
+        <label class="chk"><input type="checkbox" id="cgl"><span>J’accepte les <a href="#conditions" target="_blank" rel="noopener">conditions générales de location</a>.</span></label>
+        <p class="err" id="err" hidden>Cochez la case pour accepter les conditions avant d’envoyer votre demande.</p>
+        <button class="btn" id="send" type="button">Envoyer la demande</button>
+      </div>
+      </div>
+    </div>
+    <div class="two" id="m-bnb" hidden>
+      <div><p>Vous préférez réserver via Airbnb ? Choisissez vos dates directement sur l’annonce. Les prix peuvent y inclure les frais de service de la plateforme.</p></div>
+      <div><a class="btn" href="https://www.airbnb.fr/" target="_blank" rel="noopener">Voir l’annonce sur Airbnb</a></div>
+    </div>
+  </section>
+
+  <section id="questions">
+    <h2>Vous avez des questions ?</h2>
+    <p style="color:var(--muted);max-width:520px;margin:0 0 28px">Retrouvez les réponses aux questions les plus fréquentes des voyageurs : réservation, arrivée, équipements, séjour sur place.</p>
+    <a class="btn" href="#faq">Voir les questions fréquentes</a>
+  </section>
+
+  </main>
+
+  <main id="arrivee" hidden>
+    <a class="back" href="#">← Retour à l’accueil</a>
+    <h2 style="font-size:clamp(36px,5vw,60px)">Arrivée et départ</h2>
+    <p style="color:var(--muted);max-width:520px">Tout ce qu’il faut savoir pour entrer dans l’appartement, garer votre voiture et repartir sereinement.</p>
+
+    <section>
+      <h2>Accéder à l’appartement</h2>
+      <ol class="steps">
+        <li><b>Entrer dans la tour</b><span>Adresse : [adresse complète], Carry-le-Rouet. À l’entrée, tapez le code [code de l’immeuble] ou sonnez à [nom].</span></li>
+        <li><b>Prendre l’ascenseur</b><span>Montez jusqu’au 13<sup>e</sup> étage. L’appartement est [à gauche / à droite / porte n° XX] en sortant de l’ascenseur.</span></li>
+        <li><b>Ouvrir la porte</b><span>[Boîte à clés : emplacement et code / serrure connectée : code envoyé avant votre arrivée / remise des clés en main propre].</span></li>
+        <li><b>S’installer</b><span>Le Wi-Fi, le mode d’emploi des appareils et les numéros utiles sont [à préciser, par exemple sur le frigo].</span></li>
+      </ol>
+      <div class="note">Arrivée entre 16 h et 21 h. Pour une arrivée plus tardive, prévenez-nous au [numéro de téléphone].</div>
+    </section>
+
+    <section>
+      <h2>Où garer la voiture</h2>
+      <ol class="steps">
+        <li><b>Votre place</b><span>[Place n° XX, parking privé de la tour, niveau X / stationnement gratuit dans la rue / parking public à proximité].</span></li>
+        <li><b>Accès au parking</b><span>[Badge, télécommande ou code, et où les trouver].</span></li>
+        <li><b>Si le parking est complet</b><span>[Parking alternatif le plus proche, avec adresse et distance à pied].</span></li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Le jour du départ</h2>
+      <ol class="steps">
+        <li><b>Départ avant 11 h</b><span>Merci de libérer l’appartement à cette heure pour permettre le ménage.</span></li>
+        <li><b>Avant de partir</b><span>Fermez les fenêtres, éteignez la climatisation et les lumières, videz le réfrigérateur et sortez les poubelles : [emplacement des conteneurs]. Le ménage est compris, merci de laisser l’appartement propre (vaisselle faite).</span></li>
+        <li><b>Rendre les clés</b><span>[Remettez la clé dans la boîte à clés / laissez-la sur la table et claquez la porte].</span></li>
+      </ol>
+      <div class="note">Un souci pendant votre séjour ? Appelez-nous au [numéro de téléphone] ou écrivez à [adresse e-mail].</div>
+    </section>
+  </main>
+
+  <main id="faq" class="faq" hidden>
+    <a class="back" href="#">← Retour à l’accueil</a>
+    <h2 style="font-size:clamp(36px,5vw,60px)">Questions fréquentes</h2>
+    <p style="color:var(--muted);max-width:520px">Les réponses aux questions que les voyageurs nous posent le plus souvent.</p>
+
+    <h3>Réservation et paiement</h3>
+    <details><summary>Comment réserver ?</summary><p>Vous pouvez réserver en direct, avec le formulaire de la section « Réserver votre séjour », ou sur Airbnb. En direct, vous recevez un devis, puis vous versez un acompte pour bloquer vos dates.</p></details>
+    <details><summary>Quels sont les tarifs ?</summary><p>Le tarif en direct est de 95 € par nuit en basse saison, 125 € en moyenne saison et 180 € en haute saison, pour 2 voyageurs. Le ménage de fin de séjour et la taxe de séjour sont compris dans ces tarifs. Voir la section « Tarif en direct ».</p></details>
+    <details><summary>Faut-il verser un acompte et une caution ?</summary><p>Oui. Un acompte de [30 %] confirme la réservation et une caution de 30 % de la valeur du séjour est demandée. Elle est restituée après le départ si tout est en ordre.</p></details>
+    <details><summary>Quelle est la durée minimale de séjour ?</summary><p>2 nuits. Pour une demande particulière, contactez-nous.</p></details>
+    <details><summary>Que se passe-t-il en cas d’annulation ?</summary><p>Les conditions dépendent du délai avant l’arrivée. Elles sont détaillées dans les <a href="#conditions">conditions générales de location</a>.</p></details>
+    <details><summary>La taxe de séjour est-elle comprise dans le prix ?</summary><p>Elle est incluse dans le prix. Pour 2 adultes, elle représente environ 3,40 € à 6,50 € par personne et par nuit selon la saison. Elle est gratuite pour les mineurs.</p></details>
+
+    <h3>Arrivée et départ</h3>
+    <details><summary>À quelle heure puis-je arriver ?</summary><p>Entre 16 h et 21 h. Pour une arrivée après 21 h, un accord préalable est nécessaire.</p></details>
+    <details><summary>À quelle heure dois-je partir ?</summary><p>Avant 11 h. Un départ plus tardif est facturé 25 € par heure commencée.</p></details>
+    <details><summary>Puis-je arriver plus tôt ou partir plus tard ?</summary><p>C’est possible sur demande, selon les disponibilités. Contactez-nous quelques jours avant votre séjour.</p></details>
+    <details><summary>Comment accéder à l’appartement ?</summary><p>Toutes les étapes (entrée de la tour, ascenseur, ouverture de la porte) sont sur la page <a href="#arrivee">Arrivée et départ</a>. Vous recevez aussi les codes [2 jours] avant votre arrivée.</p></details>
+    <details><summary>Où puis-je garer ma voiture ?</summary><p>[Place de parking / stationnement à préciser]. Les détails sont sur la page <a href="#arrivee">Arrivée et départ</a>.</p></details>
+    <details><summary>Que dois-je faire avant de partir ?</summary><p>Fermez les fenêtres, éteignez la climatisation et les lumières, videz le réfrigérateur et sortez les poubelles. Le ménage est compris dans le prix, merci de laisser l’appartement propre.</p></details>
+
+    <h3>Le logement</h3>
+    <details><summary>Combien de personnes peut-on être ?</summary><p>2 voyageurs au maximum. L’appartement est un T2 de 46 m² avec une chambre, refait à neuf.</p></details>
+    <details><summary>Le ménage est-il compris ?</summary><p>Oui, le ménage de fin de séjour est compris dans le prix. Nous vous demandons simplement de laisser l’appartement propre : vaisselle faite, poubelles sorties.</p></details>
+    <details><summary>Les draps et les serviettes sont-ils fournis ?</summary><p>Oui, le linge de lit et les serviettes de toilette sont inclus dans le prix.</p></details>
+    <details><summary>Quels sont les équipements ?</summary><p>La liste complète est dans la section « Équipements » de la page d’accueil.</p></details>
+    <details><summary>Y a-t-il un ascenseur ?</summary><p>[Oui, la tour dispose d’un ascenseur jusqu’au 13<sup>e</sup> étage — à confirmer].</p></details>
+    <details><summary>Les animaux sont-ils acceptés ?</summary><p>Non, l’appartement n’accepte pas les animaux.</p></details>
+    <details><summary>Peut-on fumer dans l’appartement ?</summary><p>Non, l’appartement est non-fumeur.</p></details>
+    <details><summary>Peut-on organiser une fête ?</summary><p>Non, les fêtes et événements ne sont pas autorisés. Merci de respecter la tranquillité des voisins, surtout entre 22 h et 8 h.</p></details>
+
+    <h3>Sur place</h3>
+    <details><summary>Quelle est la plage la plus proche ?</summary><p>[Nom de la plage ou de la crique], à [X minutes] à pied. Carry-le-Rouet compte plusieurs criques et un port à quelques minutes.</p></details>
+    <details><summary>Où trouver des commerces et des restaurants ?</summary><p>[Les commerces et restaurants les plus proches, avec la distance].</p></details>
+    <details><summary>Comment venir sans voiture ?</summary><p>Carry-le-Rouet est desservie par le train sur la ligne de la Côte Bleue. [Distance entre la gare et l’appartement].</p></details>
+
+    <h3>Pendant le séjour</h3>
+    <details><summary>Que faire en cas de problème ?</summary><p>Appelez-nous au [numéro de téléphone] ou écrivez à [adresse e-mail]. Nous répondons le plus vite possible.</p></details>
+    <details><summary>Quel est le mot de passe du Wi-Fi ?</summary><p>Il est indiqué dans l’appartement, avec le mode d’emploi des appareils.</p></details>
+
+    <div class="note" style="margin-top:40px">Vous ne trouvez pas votre réponse ? Écrivez-nous à [adresse e-mail] ou utilisez le <a href="#contact">formulaire de réservation</a>.</div>
+  </main>
+
+  <main id="conditions" class="cg" hidden>
+    <a class="back" href="#">← Retour à l’accueil</a>
+    <h2 style="font-size:clamp(36px,5vw,60px)">Conditions générales de location</h2>
+    <p>Ces conditions s’appliquent à toute réservation de l’appartement faite en direct.</p>
+    <h3>Réservation et paiement</h3>
+    <p>La réservation est confirmée à réception d’un acompte de [30 %] du montant du séjour. Le solde est à régler [X jours] avant l’arrivée.</p>
+    <h3>Caution</h3>
+    <p>Une caution de 30 % de la valeur du séjour est demandée [à l’arrivée / par empreinte bancaire]. Elle est restituée sous [7 jours] après le départ, déduction faite des dégradations ou manquants éventuels.</p>
+    <h3>Annulation</h3>
+    <p>Annulation plus de [30 jours] avant l’arrivée : l’acompte est remboursé. Entre [30 et 14 jours] : l’acompte est conservé. Moins de [14 jours] : la totalité du séjour reste due.</p>
+    <h3>Horaires d’arrivée et de départ</h3>
+    <p>Arrivée entre 16 h et 21 h, départ avant 11 h. Les pénalités en cas de retard sont détaillées dans <a href="#horaires">Horaires et conditions</a>.</p>
+    <h3>Voyageurs et animaux</h3>
+    <p>Le nombre maximal de voyageurs est de 2. Les fêtes et événements ne sont pas autorisés. Les animaux ne sont pas acceptés.</p>
+    <h3>Non-fumeur</h3>
+    <p>Le logement est non-fumeur.</p>
+    <h3>Respect de la résidence</h3>
+    <p>Merci de respecter la tranquillité des voisins, en particulier entre 22 h et 8 h, ainsi que le règlement de la copropriété.</p>
+    <h3>Ménage, taxe de séjour et dégradations</h3>
+    <p>Le ménage de fin de séjour est compris dans le prix, merci de laisser l’appartement propre. La taxe de séjour est incluse dans le prix du séjour. L’appartement doit être rendu en bon état. Les dégradations sont à la charge du locataire.</p>
+    <h3>Responsabilité</h3>
+    <p>Le propriétaire n’est pas responsable des objets perdus ou volés pendant le séjour.</p>
+    <h3>Contact</h3>
+    <p>Pour toute question : [adresse e-mail], [numéro de téléphone].</p>
+  </main>
+
+  <footer class="foot">© Le 13e · Carry-le-Rouet, Côte Bleue<a href="#conditions">Conditions de location</a><a href="#faq">Questions fréquentes</a></footer>
+</div>
+<script>
+document.getElementById('send').addEventListener('click',function(){
+  var ok=document.getElementById('cgl').checked;
+  document.getElementById('err').hidden=ok;
+  if(!ok){return;}
+  var v=function(i){return document.getElementById(i).value};
+  var body='Bonjour,\n\nJe souhaite réserver du '+v('d1')+' au '+v('d2')+' pour '+v('nb')+' voyageur(s).\n\n'+v('msg')+'\n\nJ’accepte les conditions générales de location.\n\n'+v('nom');
+  window.location.href='mailto:votre@email.fr?subject='+encodeURIComponent('Demande de réservation – Le 13e')+'&body='+encodeURIComponent(body);
+});
+var rooms=['Salon','Chambre','Cuisine','Salle de bain','Balcon','Vue','Carry-le-Rouet'];
+function showRoom(r){
+  var t=document.getElementById('tabs'),g=document.getElementById('grid');
+  [].forEach.call(t.children,function(b){b.setAttribute('aria-selected',b.textContent===r?'true':'false')});
+  g.innerHTML='';
+  for(var i=0;i<4;i++){var d=document.createElement('div');d.className='ph';d.textContent='Photo : '+r.toLowerCase()+' ('+(i+1)+')';g.appendChild(d);}
+}
+rooms.forEach(function(r){
+  var b=document.createElement('button');b.type='button';b.setAttribute('role','tab');b.textContent=r;
+  b.addEventListener('click',function(){showRoom(r)});
+  document.getElementById('tabs').appendChild(b);
+});
+showRoom(rooms[0]);
+var BOOKED=[]; // dates occupées : [['2026-12-26','2027-01-02']] = nuits du 26/12 (inclus) au 02/01 (exclu)
+var cal=new Date();cal.setDate(1);var pick=[];
+function iso(d){var m=d.getMonth()+1,j=d.getDate();return d.getFullYear()+'-'+(m<10?'0':'')+m+'-'+(j<10?'0':'')+j}
+function busy(s){return BOOKED.some(function(r){return s>=r[0]&&s<r[1]})}
+function free(a,b){var d=new Date(a+'T12:00:00');while(iso(d)<b){if(busy(iso(d)))return false;d.setDate(d.getDate()+1)}return true}
+function drawCal(){
+  var y=cal.getFullYear(),m=cal.getMonth(),today=iso(new Date());
+  document.getElementById('calTitle').textContent=cal.toLocaleDateString('fr-FR',{month:'long',year:'numeric'});
+  var first=(new Date(y,m,1).getDay()+6)%7,n=new Date(y,m+1,0).getDate(),h='';
+  ['L','M','M','J','V','S','D'].forEach(function(d){h+='<span class="dw">'+d+'</span>'});
+  for(var i=0;i<first;i++){h+='<span></span>'}
+  for(var d=1;d<=n;d++){
+    var s=iso(new Date(y,m,d)),c='day';
+    if(s<today){c+=' past'}else if(busy(s)){c+=' busy'}
+    if(pick[0]===s||pick[1]===s){c+=' sel'}else if(pick[1]&&s>pick[0]&&s<pick[1]){c+=' in'}
+    h+='<button type="button" class="'+c+'" data-d="'+s+'"'+(s<today?' disabled':'')+'>'+d+'</button>';
+  }
+  document.getElementById('cal').innerHTML=h;
+}
+document.getElementById('cal').addEventListener('click',function(e){
+  var s=e.target.getAttribute&&e.target.getAttribute('data-d');
+  if(!s){return}
+  if(pick.length===1&&s>pick[0]&&free(pick[0],s)){pick=[pick[0],s]}
+  else if(!busy(s)){pick=[s]}
+  document.getElementById('d1').value=pick[0]||'';
+  document.getElementById('d2').value=pick[1]||'';
+  drawCal();
+});
+document.getElementById('calPrev').addEventListener('click',function(){cal.setMonth(cal.getMonth()-1);drawCal()});
+document.getElementById('calNext').addEventListener('click',function(){cal.setMonth(cal.getMonth()+1);drawCal()});
+drawCal();
+[].forEach.call(document.querySelectorAll('#mode button'),function(b){
+  b.addEventListener('click',function(){
+    var m=b.getAttribute('data-m');
+    [].forEach.call(document.querySelectorAll('#mode button'),function(x){x.setAttribute('aria-selected',x===b?'true':'false')});
+    document.getElementById('m-direct').hidden=m!=='direct';
+    document.getElementById('m-bnb').hidden=m!=='bnb';
+  });
+});
+function route(){
+  var h=location.hash.slice(1),sub=(h==='arrivee'||h==='conditions'||h==='faq')?h:'';
+  document.getElementById('home').hidden=!!sub;
+  document.getElementById('arrivee').hidden=sub!=='arrivee';
+  document.getElementById('conditions').hidden=sub!=='conditions';
+  document.getElementById('faq').hidden=sub!=='faq';
+  var el=!sub&&h?document.getElementById(h):null;
+  if(el){el.scrollIntoView();}else{window.scrollTo(0,0);}
+}
+window.addEventListener('hashchange',route);
+route();
+</script>
+</body>
+</html>
